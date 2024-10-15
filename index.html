@@ -3,9 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My GitHub Pages Site</title>
+    <title>server Whitelist</title>
 </head>
 <body>
-    <h1>hello welcome to my github pages site</h1>
+    <h1>server whitelist</h1>
+    <p>here are the whitelisted servers:</p>
+    <ul id="server-list"></ul>
+    <script>
+        fetch('data/json/serverwhitelist.json')
+            .then(response => response.json())
+            .then(data => {
+                const serverList = document.getElementById('server-list');
+                data.servers.forEach(server => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = server;
+                    serverList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error('Error fetching server whitelist:', error));
+    </script>
 </body>
 </html>
